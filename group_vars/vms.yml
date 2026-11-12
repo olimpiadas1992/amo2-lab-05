@@ -1,0 +1,8 @@
+student_name: "Эспиноза Ортис Хуан Карлос"
+student_group: "1"
+env: "lab"
+
+base_packages:
+  - git
+  - curl
+  - htop

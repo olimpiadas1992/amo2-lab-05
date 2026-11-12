@@ -1,0 +1,66 @@
+
+PLAY [Лабораторная работа 5 - Ansible] *****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [lab-vm]
+
+TASK [Install] *****************************************************************
+ok: [lab-vm] => (item=git)
+ok: [lab-vm] => (item=curl)
+ok: [lab-vm] => (item=htop)
+
+TASK [Deploy /etc/cron.d/ansible_check] ****************************************
+--- before
++++ after: /home/jc/.ansible/tmp/ansible-local-119333shz_su1n/tmpuwomwrqr/ansible_check.j2
+@@ -0,0 +1,2 @@
++# deployed by Эспиноза Ортис Хуан Карлос on 2026-11-12
++* * * * * root echo ping > /tmp/ansible_ping
+
+changed: [lab-vm]
+
+TASK [Install nginx] ***********************************************************
+Solving dependencies...
+The following additional packages will be installed:
+  nginx-common
+Suggested packages:
+  fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  nginx nginx-common
+0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+changed: [lab-vm]
+
+TASK [Deploy index.html] *******************************************************
+--- before
++++ after: /home/jc/.ansible/tmp/ansible-local-119333shz_su1n/tmpf5dymh3h/index.html.j2
+@@ -0,0 +1,11 @@
++<!DOCTYPE html>
++<html>
++<head><meta charset="utf-8"><title>Lab 5 Ansible</title></head>
++<body>
++<!-- env: lab -->
++<h1>Web node</h1>
++<p>Estudiante: Эспиноза Ортис Хуан Карлос</p>
++<p>Grupo: 1</p>
++<p>Desplegado: 2026-11-12</p>
++</body>
++</html>
+
+changed: [lab-vm]
+
+RUNNING HANDLER [Restart cron] *************************************************
+changed: [lab-vm]
+
+RUNNING HANDLER [Restart nginx] ************************************************
+[ERROR]: Task failed: Module failed: Could not find the requested service nginx: host
+Origin: /home/jc/Документы/UTMN/Магистратура/semester 3/AMO/ansible/playbook.yml:32:7
+
+30         state: restarted
+31
+32     - name: Restart nginx
+         ^ column 7
+
+fatal: [lab-vm]: FAILED! => {"changed": false, "msg": "Could not find the requested service nginx: host"}
+
+PLAY RECAP *********************************************************************
+lab-vm                     : ok=6    changed=4    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+

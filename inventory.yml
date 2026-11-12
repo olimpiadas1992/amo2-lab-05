@@ -1,0 +1,8 @@
+all:
+  children:
+    vms:
+      hosts:
+        lab-vm:
+          ansible_host: 64.177.53.23
+          ansible_port: 443
+          ansible_user: root

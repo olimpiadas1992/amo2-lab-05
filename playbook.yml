@@ -1,0 +1,35 @@
+- name: Лабораторная работа 5 - Ansible
+  hosts: vms
+  become: true
+
+  tasks:
+    - name: Install
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+      loop: "{{ base_packages }}"
+
+    - name: Deploy /etc/cron.d/ansible_check
+      ansible.builtin.template:
+        src: ansible_check.j2
+        dest: /etc/cron.d/ansible_check
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Restart cron
+
+    - name: Task A
+      ansible.builtin.import_tasks: tasks/A.yml
+
+  handlers:
+    - name: Restart cron
+      ansible.builtin.service:
+        name: cron
+        state: restarted
+
+    - name: Restart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted

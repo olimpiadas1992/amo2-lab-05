@@ -1,0 +1,23 @@
+
+PLAY [Лабораторная работа 5 - Ansible] *****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [lab-vm]
+
+TASK [Install] *****************************************************************
+ok: [lab-vm] => (item=git)
+ok: [lab-vm] => (item=curl)
+ok: [lab-vm] => (item=htop)
+
+TASK [Deploy /etc/cron.d/ansible_check] ****************************************
+ok: [lab-vm]
+
+TASK [Install nginx] ***********************************************************
+ok: [lab-vm]
+
+TASK [Deploy index.html] *******************************************************
+ok: [lab-vm]
+
+PLAY RECAP *********************************************************************
+lab-vm                     : ok=5    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
